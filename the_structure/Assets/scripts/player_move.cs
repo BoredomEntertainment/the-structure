@@ -53,7 +53,8 @@ public class player_move : MonoBehaviour
         // stop
         if (Input.GetKeyUp("w") || Input.GetKeyUp("a") || Input.GetKeyUp("s") || Input.GetKeyUp("d"))
         {
-        {
+            {
+            }
         }
     }
 }
