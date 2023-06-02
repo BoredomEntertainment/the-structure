@@ -119,15 +119,20 @@ public class tile_automater : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        doSim(numR);    
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown("g"))
         {
             doSim(numR);
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetKeyDown("c"))
         {
             clearMap(true);
         }
