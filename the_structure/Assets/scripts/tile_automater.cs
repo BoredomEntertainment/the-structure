@@ -31,7 +31,7 @@ public class tile_automater : MonoBehaviour
     int width;
     int height;
 
-    public void doSim(int numR)
+    public void doSimTop(int numR)
     {
         clearMap(false);
         width = tMapSize.x;
@@ -55,6 +55,36 @@ public class tile_automater : MonoBehaviour
                 if (terrainMap[x,y] == 1)
                 {
                     topMap.SetTile(new Vector3Int(-x + width / 2, -y + height / 2, 0), topTile);
+                    //botMap.SetTile(new Vector3Int(-x + width / 2, -y + height / 2, 0), botTile);
+                }
+            }
+        }
+    }
+
+    public void doSimBot(int numR)
+    {
+        clearMap(false);
+        width = tMapSize.x;
+        height = tMapSize.y;
+
+        if (terrainMap == null)
+        {
+            terrainMap = new int[width, height];
+            initPos();
+        }
+
+        for (int i = 0; i < numR; i++)
+        {
+            terrainMap = genTilePos(terrainMap);
+        }
+
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                if (terrainMap[x, y] == 1)
+                {
+                    //topMap.SetTile(new Vector3Int(-x + width / 2, -y + height / 2, 0), topTile);
                     botMap.SetTile(new Vector3Int(-x + width / 2, -y + height / 2, 0), botTile);
                 }
             }
@@ -121,7 +151,8 @@ public class tile_automater : MonoBehaviour
 
     void Start()
     {
-        doSim(numR);    
+        doSimTop(numR);
+        doSimBot(numR);
     }
 
     // Update is called once per frame
@@ -129,7 +160,8 @@ public class tile_automater : MonoBehaviour
     {
         if (Input.GetKeyDown("g"))
         {
-            doSim(numR);
+            doSimTop(numR);
+            doSimBot(numR);
         }
 
         if (Input.GetKeyDown("c"))
